@@ -1,19 +1,5 @@
 function xdot = KE88_dinamica(u)
-%KE88_DINAMICA  Dinamica 6DOF del dron KE88 con restriccion robusta de suelo.
-%
-% Entrada u (16x1):
-%   u(1:12) = estado x = [pos(3); vel(3); euler(3); omega_cuerpo(3)]
-%   u(13:16)= empujes de motores [T1;T2;T3;T4] en Newtons
-% Salida xdot (12x1) = derivada del estado
-%
-% CAMBIOS vs version original:
-%   1. Suelo con resorte-amortiguador: en lugar de solo anular xdot,
-%      se aplica una fuerza de reaccion proporcional a la penetracion (z<0)
-%      y una fuerza de amortiguamiento de impacto. Esto es fisicamente
-%      correcto y evita que el integrador Simulink acumule error negativo en z.
-%   2. Se satura xdot(3) con max(...,0) SOLO cuando el dron ya esta en suelo
-%      y con velocidad negativa, como capa adicional de seguridad.
-%   3. Friccion horizontal realista cuando esta apoyado.
+
 
 global P
 if isempty(P)

@@ -7,23 +7,13 @@
 %   4. KE88_Arquitectura.slx   - modelo de ARQUITECTURA en System Composer
 %                                (primera opcion: "Architecture Model")
 %                                que conecta los 3 componentes anteriores.
-%
-% USO (en MATLAB Online):
-%   1. Sube los 4 archivos .m a tu carpeta de MATLAB Drive
-%   2. Escribe en la consola:  KE88_construir_modelo
-%   3. Se abrira KE88_Arquitectura. Presiona "Run" y mueve los sliders.
-%   4. Al terminar, escribe:   KE88_animacion(out)
-%
-% Escuadron 201 - Gemelo digital KE88
+
 
 clc;
 fprintf('=== Construyendo gemelo digital KE88 ===\n');
 KE88_parametros;                  % carga la estructura global P
 
-%% ------------------------------------------------------------------
-%  MODELO 1: CONTROL VIRTUAL (KE88_control.slx)
-%  4 comandos de vuelo con sliders de Dashboard
-%% ------------------------------------------------------------------
+
 m1 = 'KE88_control';
 cerrar_si_abierto(m1);
 new_system(m1); load_system(m1);
@@ -66,10 +56,7 @@ catch, end
 save_system(m1);
 fprintf('  [OK] %s.slx\n', m1);
 
-%% ------------------------------------------------------------------
-%  MODELO 2: DRON KE88 (KE88_dron.slx)
-%  PID de actitud -> mezcladora -> motores -> dinamica 6DOF
-%% ------------------------------------------------------------------
+
 m2 = 'KE88_dron';
 cerrar_si_abierto(m2);
 new_system(m2); load_system(m2);
@@ -176,9 +163,7 @@ add_line(m2,'Motores/1'   ,'empujes/1','autorouting','on');
 save_system(m2);
 fprintf('  [OK] %s.slx\n', m2);
 
-%% ------------------------------------------------------------------
-%  MODELO 3: VISUALIZACION (KE88_visualizacion.slx)
-%% ------------------------------------------------------------------
+
 m3 = 'KE88_visualizacion';
 cerrar_si_abierto(m3);
 new_system(m3); load_system(m3);
@@ -216,9 +201,7 @@ add_line(m3,'empujes/1','log_empujes/1'  ,'autorouting','on');
 save_system(m3);
 fprintf('  [OK] %s.slx\n', m3);
 
-%% ------------------------------------------------------------------
-%  MODELO 4: ARQUITECTURA EN SYSTEM COMPOSER (KE88_Arquitectura.slx)
-%% ------------------------------------------------------------------
+
 archOK = false;
 try
     ma = 'KE88_Arquitectura';

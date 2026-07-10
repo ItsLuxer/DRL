@@ -1,27 +1,5 @@
 function y = KE88_dibujo(x)
-%KE88_DIBUJO  Vista 3D en vivo del KE88 durante la simulacion.
-%
-% VERSION CON MODELO STL:
-%   En vez de dibujar el dron como un esquema de lineas y marcadores,
-%   esta version carga el modelo 3D "DronNaya.STL" (debe estar en la
-%   misma carpeta que este archivo) y lo mueve/rota en cada paso usando
-%   un hgtransform. El STL se lee una sola vez (persistent) porque leer
-%   y re-dibujar la malla completa en cada paso seria muy lento.
-%
-%   pos(3) = max(pos(3), 0): la posicion vertical usada para dibujar
-%   nunca es negativa (el dron nunca se dibuja bajo el suelo).
-%
-% AJUSTES SI EL MODELO SE VE MAL ORIENTADO (variables mas abajo):
-%   ESCALA_STL      -> tamano del modelo. [] = se calcula automaticamente
-%                      para que el ancho del modelo coincida con la
-%                      separacion diagonal motor-motor definida en
-%                      KE88_parametros.m (P.dx, P.dy). Si el dron se ve
-%                      demasiado grande o chico, fija aqui un numero
-%                      (metros por unidad del STL) en vez de [].
-%   YAW_OFFSET_DEG  -> gira el modelo alrededor de su eje vertical (Z).
-%                      Si el dron "vuela de lado" o "para atras" respecto
-%                      a la trayectoria, prueba con 45, 90, -45, 135, etc.
-%                      hasta que el morro apunte en la direccion de vuelo.
+
 
 persistent ax hT tr X t0
 y = 0; x = x(:);
@@ -47,10 +25,7 @@ if isempty(ax) || ~isgraphics(ax)
     c = (max(V,[],1) + min(V,[],1)) / 2;
     V = V - c;
 
-    % --- remapear ejes nativos del STL a ejes cuerpo (x=adelante, y=izq, z=arriba) ---
-    % En DronNaya.STL el eje vertical del dron (el mas "delgado") es la
-    % Y nativa, y el plano de las helices es el plano X-Z nativo.
-    % Esta es una rotacion propia (no espeja el modelo).
+  
     Vb = [V(:,3), V(:,1), V(:,2)];   % body_x=Z_nativa, body_y=X_nativa, body_z=Y_nativa
 
     % rotacion de ajuste de guinada (ver YAW_OFFSET_DEG arriba)

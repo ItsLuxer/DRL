@@ -1,8 +1,7 @@
 %% KE88_parametros.m
 % Parametros fisicos del dron KIWO KE88 (Escuadron 201)
 % Fuente: mediciones del equipo (COMPONENTES_DRON_.pdf) + estimaciones
-% marcadas como [EST] que deben refinarse con mediciones reales.
-%
+
 % Este script se ejecuta automaticamente al iniciar la simulacion
 % (esta registrado en el InitFcn del modelo KE88_Sim).
 %

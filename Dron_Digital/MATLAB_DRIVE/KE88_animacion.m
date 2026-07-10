@@ -1,22 +1,4 @@
 function KE88_animacion(out)
-%KE88_ANIMACION  Reproduce en 3D el vuelo simulado del KE88.
-% Uso: despues de correr la simulacion en Simulink, escribe en la consola:
-%       KE88_animacion(out)
-%
-% VERSION CON MODELO STL:
-%   En vez de dibujar el dron como un esquema de lineas y marcadores, esta
-%   version carga el modelo 3D "DronNaya.STL" (debe estar en la misma
-%   carpeta que este archivo) y lo mueve/rota cuadro a cuadro usando un
-%   hgtransform.
-%
-%   Se sigue aplicando el clamping pos(3) = max(pos(3), 0) en cada frame,
-%   y el eje Z minimo de la camara siempre empieza en 0.
-%
-% AJUSTES SI EL MODELO SE VE MAL ORIENTADO:
-%   ESCALA_STL      -> tamano del modelo. [] = automatico (ver mas abajo).
-%   YAW_OFFSET_DEG  -> gira el modelo sobre su eje vertical si el morro
-%                      no apunta en la direccion de vuelo (prueba 45, 90,
-%                      -45, 135, etc).
 
 if nargin < 1
     out = evalin('base','out');
