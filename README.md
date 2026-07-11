@@ -1,6 +1,10 @@
-# 🚀 DRL
+# 🚀 DRL Equipo A
 
-DRL es un vehículo aéreo no tripulado (UAV) tipo cuadricóptero diseñado para la exploración y recopilación de datos en tiempo real. Construido desde cero con un enfoque multidisciplinario, este proyecto integra sistemas de control de vuelo estabilizado, transmisión de telemetría de largo alcance y un chasis optimizado aerodinámicamente. El objetivo principal de DRL es proporcionar una plataforma de vuelo confiable y de código
+¡Hola! 😁 Somos estudiantes del **Centro de Enseñanza Técnica Industrial (CETI)**, actualmente cursando la asignatura de **Control I**.
+
+<p align="justify">
+El objetivo principal de este proyecto es el diseño y construcción de un sistema aéreo no tripulado (dron) desde cero. Para fundamentar el desarrollo y comprender la integración de sus subsistemas, hemos iniciado este proceso mediante la ingeniería inversa de un dron comercial. Este análisis técnico nos ha permitido identificar, documentar y comprender la arquitectura, los componentes electrónicos y los protocolos de comunicación críticos necesarios para el funcionamiento y control de vuelo de un dron.
+</p>
 
 ## 🛠 Equipo de Gestión y Desarrollo
 
