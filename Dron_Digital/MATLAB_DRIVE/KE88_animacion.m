@@ -10,11 +10,16 @@ global P
 if isempty(P), KE88_parametros; end
 
 % ---------- parametros de ajuste del modelo STL ----------
-ESCALA_STL     = 0.020;
-YAW_OFFSET_DEG = 0;
+% Si el modelo se ve "de cabeza" y/o el frente apunta al costado,
+% ajusta estos 3 angulos (en grados) hasta que se vea bien.
+% Se aplican en orden: primero ROLL, luego PITCH, luego YAW.
+ESCALA_STL      = 0.0017;
+ROLL_OFFSET_DEG  = 180;   % gira el modelo sobre su eje "adelante" (x) -> corrige que vuele de espaldas
+PITCH_OFFSET_DEG = 0;     % gira el modelo sobre su eje "izquierda" (y)
+YAW_OFFSET_DEG    = 90;   % gira el modelo sobre su eje vertical (z)  -> ya corregia el frente
 
 % ---------- cargar y preparar el modelo STL ----------
-ruta_stl = fullfile(fileparts(mfilename('fullpath')), 'DronNaya.STL');
+ruta_stl = fullfile(fileparts(mfilename('fullpath')), 'Dron_Equipo_A.STL');
 TR = stlread(ruta_stl);
 V  = TR.Points;
 F  = TR.ConnectivityList;
@@ -22,13 +27,18 @@ F  = TR.ConnectivityList;
 c = (max(V,[],1) + min(V,[],1)) / 2;
 V = V - c;
 
-% remapeo de ejes nativos del STL a ejes cuerpo (x=adelante, y=izq, z=arriba)
-% (el eje vertical del dron en este STL es la Y nativa; ver KE88_dibujo.m)
-Vb = [V(:,3), V(:,1), V(:,2)];
+% En Dron_Equipo_A.STL el eje vertical del dron YA es la Z nativa
+% (a diferencia de DronNaya.STL, aqui no hace falta reordenar ejes).
+Vb = V;
 
-cy = cosd(YAW_OFFSET_DEG); sy = sind(YAW_OFFSET_DEG);
-Ry = [cy -sy 0; sy cy 0; 0 0 1];
-Vb = (Ry * Vb')';
+cr=cosd(ROLL_OFFSET_DEG); sr=sind(ROLL_OFFSET_DEG);
+cp=cosd(PITCH_OFFSET_DEG); sp=sind(PITCH_OFFSET_DEG);
+cy=cosd(YAW_OFFSET_DEG);  sy=sind(YAW_OFFSET_DEG);
+Rx_ = [1 0 0; 0 cr -sr; 0 sr cr];
+Ry_ = [cp 0 sp; 0 1 0; -sp 0 cp];
+Rz_ = [cy -sy 0; sy cy 0; 0 0 1];
+R_ajuste = Rz_ * Ry_ * Rx_;
+Vb = (R_ajuste * Vb')';
 
 diag_real = 2*sqrt(P.dx^2 + P.dy^2);
 span      = Vb(:,[1 2]);

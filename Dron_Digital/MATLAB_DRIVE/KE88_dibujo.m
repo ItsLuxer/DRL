@@ -5,8 +5,13 @@ persistent ax hT tr X t0
 y = 0; x = x(:);
 
 % ---------- parametros de ajuste del modelo STL ----------
-ESCALA_STL     = 0.020;
-YAW_OFFSET_DEG = 0;
+% Si el modelo se ve "de cabeza" y/o el frente apunta al costado,
+% ajusta estos 3 angulos (en grados) hasta que se vea bien.
+% Se aplican en orden: primero ROLL, luego PITCH, luego YAW.
+ESCALA_STL      = 0.0017;
+ROLL_OFFSET_DEG  = 180;   % gira el modelo sobre su eje "adelante" (x) -> corrige que vuele de espaldas
+PITCH_OFFSET_DEG = 0;     % gira el modelo sobre su eje "izquierda" (y)
+YAW_OFFSET_DEG    = 90;   % gira el modelo sobre su eje vertical (z)  -> ya corregia el frente
 
 if isempty(ax) || ~isgraphics(ax)
     f = figure(99); clf(f); set(f,'Name','KE88 en vivo (STL)','Color','w');
@@ -16,7 +21,7 @@ if isempty(ax) || ~isgraphics(ax)
     surf(ax,gx,gy,0*gx,'FaceColor',[0.9 0.95 0.9],'EdgeColor',[0.8 0.85 0.8]);
 
     % --- cargar el modelo STL (una sola vez) ---
-    ruta_stl = fullfile(fileparts(mfilename('fullpath')), 'DronNaya.STL');
+    ruta_stl = fullfile(fileparts(mfilename('fullpath')), 'Dron_Equipo_A.STL');
     TR = stlread(ruta_stl);
     V  = TR.Points;                 % vertices en coordenadas nativas del STL
     F  = TR.ConnectivityList;
@@ -25,13 +30,19 @@ if isempty(ax) || ~isgraphics(ax)
     c = (max(V,[],1) + min(V,[],1)) / 2;
     V = V - c;
 
-  
-    Vb = [V(:,3), V(:,1), V(:,2)];   % body_x=Z_nativa, body_y=X_nativa, body_z=Y_nativa
+    % En Dron_Equipo_A.STL el eje vertical del dron YA es la Z nativa
+    % (a diferencia de DronNaya.STL, aqui no hace falta reordenar ejes).
+    Vb = V;   % body_x=X_nativa, body_y=Y_nativa, body_z=Z_nativa
 
-    % rotacion de ajuste de guinada (ver YAW_OFFSET_DEG arriba)
-    cy = cosd(YAW_OFFSET_DEG); sy = sind(YAW_OFFSET_DEG);
-    Ry = [cy -sy 0; sy cy 0; 0 0 1];
-    Vb = (Ry * Vb')';
+    % rotacion de ajuste roll-pitch-yaw (ver parametros arriba)
+    cr=cosd(ROLL_OFFSET_DEG); sr=sind(ROLL_OFFSET_DEG);
+    cp=cosd(PITCH_OFFSET_DEG); sp=sind(PITCH_OFFSET_DEG);
+    cy=cosd(YAW_OFFSET_DEG);  sy=sind(YAW_OFFSET_DEG);
+    Rx_ = [1 0 0; 0 cr -sr; 0 sr cr];
+    Ry_ = [cp 0 sp; 0 1 0; -sp 0 cp];
+    Rz_ = [cy -sy 0; sy cy 0; 0 0 1];
+    R_ajuste = Rz_ * Ry_ * Rx_;
+    Vb = (R_ajuste * Vb')';
 
     % --- escalar el modelo al tamano real del dron ---
     global P
