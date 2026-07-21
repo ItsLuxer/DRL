@@ -28,7 +28,7 @@ A continuación se documentan los componentes electrónicos y mecánicos utiliza
 
 <table>
   <tr>
-    <td align="center" width="500"><img src="assets/components/AR1660-Motor-Brushless-A2212-KV1400-PINOUT.png" width="400"/></td>
+    <td align="center" width="250"><img src="assets/components/AR1660-Motor-Brushless-A2212-KV1400-PINOUT.png" width="250"/></td>
     <td>
       <b>Motor Brushless</b><br>
   <ul>
@@ -48,17 +48,36 @@ A continuación se documentan los componentes electrónicos y mecánicos utiliza
     </td>
   </tr>
   <tr>
-    <td align="center" width="200"><img src="assets/components/fc.png" width="180"/></td>
+    <td align="center" width="250"><img src="assets/components/AR1659-ESC-30A-Driver-Motor-Brushless.png" width="250"/></td>
     <td>
-      <b>Flight Controller (STM32F411 - BlackPill)</b><br>
-      Placa encargada del procesamiento de sensores y ejecución del firmware Betaflight.
+      <b>ESC</b><br>
+<ul>
+    <li><b>Modelo:</b> ESC 30A Driver Motor Brushless</li>
+    <li><b>Voltaje de entrada:</b> 2–4 celdas de litio o 5–12 celdas NiCd/NiMH</li>
+    <li><b>Corriente continua:</b> 30 A</li>
+    <li><b>Corriente máxima (ráfaga):</b> 40 A</li>
+    <li><b>Salida BEC:</b> 5 V / 2 A</li>
+    <li><b>Frecuencia de trabajo:</b> 50–60 Hz (señal PWM)</li>
+    <li><b>RPM máximas soportadas:</b> 210,000 RPM (2 polos), 70,000 RPM (6 polos), 35,000 RPM (12 polos)</li>
+    <li><b>Señal de control:</b> PWM estándar (1000–2000 µs)</li>
+    <li><b>Tamaño:</b> 57 mm × 25 mm × 8 mm</li>
+    <li><b>Peso neto:</b> 27 g</li>
+  </ul>
     </td>
   </tr>
   <tr>
-    <td align="center" width="200"><img src="assets/components/esc.png" width="180"/></td>
+    <td align="center" width="250"><img src="assets/components/YT_5067.png" width="250"/></td>
     <td>
-      <b>ESC (Electronic Speed Controller)</b><br>
-      Controla la velocidad de los motores a partir de las señales del FC.
+      <b>Bateria</b><br>
+  <ul>
+    <li><b>Voltaje:</b> 11.1 V</li>
+    <li><b>Celdas:</b> 3S</li>
+    <li><b>Capacidad de descarga:</b> 30 a 60C</li>
+    <li><b>Corriente:</b> 1,400 mAh</li>
+    <li><b>Descarga continua:</b> 25C</li>
+    <li><b>Tamaño:</b> 85.7 mm x 29.8 mm x 20.2 mm</li>
+    <li><b>Peso neto:</b> 125 g</li>
+  </ul>
     </td>
   </tr>
   <tr>
