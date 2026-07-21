@@ -22,6 +22,70 @@ Este proyecto es posible gracias al trabajo colaborativo del siguiente equipo de
 
 ---
 
+## 🔩 Componentes del Dron
+
+A continuación se documentan los componentes electrónicos y mecánicos utilizados en el desarrollo del prototipo propio.
+
+<table>
+  <tr>
+    <td align="center" width="500"><img src="assets/components/AR1660-Motor-Brushless-A2212-KV1400-PINOUT.png" width="400"/></td>
+    <td>
+      <b>Motor Brushless</b><br>
+  <ul>
+    <li><b>Modelo:</b> A2212/6 T</li>
+    <li><b>Motor KV (RPM / V):</b> KV2200</li>
+    <li><b>RPM / V:</b> 2200 KV (2200 revoluciones por minuto por cada volt suministrado)</li>
+    <li><b>Voltaje:</b> 7.2 V a 12 V</li>
+    <li><b>Corriente:</b> 12 A / 60 s</li>
+    <li><b>Eficiencia máxima:</b> 80%</li>
+    <li><b>Corriente máxima de eficiencia:</b> 4 ~ 10 A (> 75%)</li>
+    <li><b>Corriente sin carga:</b> 10 V / 0.5 A</li>
+    <li><b>Tamaño de motor (con eje):</b> 27.5 mm x 38.5 mm</li>
+    <li><b>Diámetro del eje:</b> 3.17 mm (3.2 mm)</li>
+    <li><b>Longitud del diámetro:</b> 11.5 mm</li>
+    <li><b>Peso de motor:</b> 47 g</li>
+  </ul>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="200"><img src="assets/components/fc.png" width="180"/></td>
+    <td>
+      <b>Flight Controller (STM32F411 - BlackPill)</b><br>
+      Placa encargada del procesamiento de sensores y ejecución del firmware Betaflight.
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="200"><img src="assets/components/esc.png" width="180"/></td>
+    <td>
+      <b>ESC (Electronic Speed Controller)</b><br>
+      Controla la velocidad de los motores a partir de las señales del FC.
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="200"><img src="assets/components/motor.png" width="180"/></td>
+    <td>
+      <b>Motores</b><br>
+      Tipo, KV y especificaciones técnicas.
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="200"><img src="assets/components/receiver.png" width="180"/></td>
+    <td>
+      <b>Receptor / Módulo de Comunicación</b><br>
+      Protocolo utilizado y frecuencia de operación.
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="200"><img src="assets/components/battery.png" width="180"/></td>
+    <td>
+      <b>Batería</b><br>
+      Capacidad, voltaje y tipo de celdas.
+    </td>
+  </tr>
+</table>
+
+---
+
 # 🚁 Compilación de Betaflight 4.5.2 para STM32F411 (BlackPill)
 
 **Objetivo:** Compilar un firmware funcional de Betaflight 4.5.2 para una placa de desarrollo genérica STM32F411 (BlackPill) en un entorno Windows utilizando MSYS2, evitando errores de estructura de directorios y dependencias de Python.
