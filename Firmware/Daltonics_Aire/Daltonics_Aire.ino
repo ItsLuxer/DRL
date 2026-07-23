@@ -36,7 +36,10 @@ PaqueteControl comandosDron = {1000, 1500, 1500, 1500, 0};
 unsigned long ultimaVezRecibido = 0;
 const unsigned long TIMEOUT_FAILSAFE = 500; // ms sin señal -> failsafe
 
-void onDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len) {
+// NOTA: firma actualizada para nucleos ESP32 basados en ESP-IDF 5 (Arduino
+// core 3.x). La firma vieja (const uint8_t *mac, ...) ya no compila (mismo
+// problema que se encontro en ESP32_PRUEBATIERRA.ino con onDataSent).
+void onDataRecv(const esp_now_recv_info_t *recv_info, const uint8_t *incomingData, int len) {
     if (len == sizeof(PaqueteControl)) {
         memcpy(&comandosDron, incomingData, sizeof(comandosDron));
         ultimaVezRecibido = millis();
@@ -125,7 +128,7 @@ void setup() {
     if (esp_now_init() != ESP_OK) {
         Serial.println("Error critico: no se pudo inicializar ESP-NOW");
     }
-    esp_now_register_recv_cb(esp_now_recv_cb_t(onDataRecv));
+    esp_now_register_recv_cb(onDataRecv);
 
     // --- IMU ---
     Wire.begin(SDA_PIN, SCL_PIN);

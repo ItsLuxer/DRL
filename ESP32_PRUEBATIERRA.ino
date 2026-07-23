@@ -5,7 +5,7 @@
 // =========================================================================
 // DIRECCIÓN MAC DEL RECEPTOR (Reemplaza con la MAC de tu ESP32-C3 Supermini)
 // =========================================================================
-uint8_t macReceptor[] = {0x7C, 0xDF, 0xA1, 0xXX, 0xXX, 0xXX}; 
+uint8_t macReceptor[] = {0x70, 0xAF, 0x09, 0x15, 0x43, 0x2C};
 
 // Estructura de datos para el envío
 struct __attribute__((packed)) PaqueteControl {
@@ -20,7 +20,9 @@ PaqueteControl datosAEnviar;
 esp_now_peer_info_t peerInfo;
 
 // Callback opcional para verificar si el paquete se entregó con éxito en el aire
-void onDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
+// NOTA: firma actualizada para nucleos ESP32 basados en ESP-IDF 5 (Arduino
+// core 3.x). La firma vieja (const uint8_t *mac_addr, ...) ya no compila.
+void onDataSent(const wifi_tx_info_t *tx_info, esp_now_send_status_t status) {
     // Descomentar para depuración en banco (puede alentar el bucle a frecuencias altas)
     // Serial.print("Estado de envío: ");
     // Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Éxito" : "Fallo");
