@@ -108,7 +108,17 @@ float DY   = 0.1061f;
 float TMAX = 2.73f;
 float CYAW = 0.013f;
 
-// ================= GANANCIAS PID (mismo punto de partida conservador) =================
+// ================= GANANCIAS PID =================
+// Punto de partida CONSERVADOR (~mitad del gemelo digital) para el primer
+// contacto real: mejor blando que sobre-corregir y voltear.
+//
+// GANANCIAS DEL GEMELO DIGITAL (DALTONICS_parametros.m, tuneadas en
+// simulacion para el dron de 530 g) — meta a la que subir gradualmente
+// si la prueba de banco sin helices responde sana:
+//   Kp_ang = 0.077   Ki_ang = 0.019   Kd_ang = 0.023   N = 40
+//   Kp_yaw = 0.052   Ki_yaw = 0.022
+// Orden de tuneo: Kp primero, Kd si oscila, Ki al final y de a poco
+// (si se activa Ki, agregar limite al integrador / anti-windup).
 float Kp_ang = 0.035f, Ki_ang = 0.0f, Kd_ang = 0.010f, N_filt = 20.0f;
 float Kp_yaw = 0.020f, Ki_yaw = 0.0f;
 
