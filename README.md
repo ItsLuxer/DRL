@@ -22,7 +22,7 @@ Este proyecto es posible gracias al trabajo colaborativo del siguiente equipo de
 
 ---
 
-## 🔩 Componentes del Dron
+# 🔩 Componentes del Dron
 
 A continuación se documentan los componentes electrónicos y mecánicos utilizados en el desarrollo del prototipo propio.
 
@@ -193,6 +193,23 @@ A continuación se documentan los componentes electrónicos y mecánicos utiliza
     </td>
   </tr>
 </table>
+
+---
+---
+
+# 📄 Planos
+
+A continuación se documentan los planos técnicos utilizados en el desarrollo del prototipo.
+
+<div align="center">
+
+### Plano del Chasis
+<img src="assets/planos/plano-chasis.png" width="600"/>
+
+### Distribución de Componentes
+<img src="assets/planos/plano-distribucion-componentes.png" width="600"/>
+
+</div>
 
 ---
 
